@@ -1,0 +1,17 @@
+{
+    "name": "lightning-digital/bk-estimate-generator",
+    "description": "BK Pools estimate generator plugin",
+    "type": "wordpress-plugin",
+    "require": {
+        "dompdf/dompdf": "^2.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "autoload": {
+        "psr-4": {}
+    }
+}

@@ -1,0 +1,561 @@
+/* ============================================================
+   BK Estimate Page
+   Public-facing estimate page styles.
+   ============================================================ */
+
+/* ---- Reset & Base ----------------------------------------- */
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+.bk-estimate-body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 1.6;
+	color: #333;
+	background: #f4f7fa;
+}
+
+.bk-estimate-container {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+/* ---- Section headings ------------------------------------- */
+.bk-estimate-section-heading {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #1a4a6e;
+	margin: 0 0 16px;
+	padding-bottom: 8px;
+	border-bottom: 2px solid #cde0f0;
+}
+
+/* ---- Header ----------------------------------------------- */
+.bk-estimate-header {
+	background: #1a6ea8;
+	color: #fff;
+	padding: 16px 0;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.bk-estimate-header__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.bk-estimate-header__logo {
+	max-height: 44px;
+	max-width: 160px;
+	display: block;
+}
+
+.bk-estimate-header__company-name {
+	font-size: 1.2rem;
+	font-weight: 700;
+}
+
+.bk-estimate-header__meta {
+	font-size: 0.85rem;
+	opacity: 0.9;
+}
+
+.bk-estimate-header__valid strong {
+	font-weight: 700;
+}
+
+/* ---- Hero ------------------------------------------------- */
+.bk-estimate-hero {
+	background: linear-gradient(135deg, #1a4a6e 0%, #1a6ea8 100%);
+	color: #fff;
+	padding: 48px 0 40px;
+}
+
+.bk-estimate-hero__heading {
+	font-size: 1.75rem;
+	font-weight: 700;
+	margin: 0 0 12px;
+	line-height: 1.3;
+}
+
+.bk-estimate-hero__sub {
+	font-size: 1rem;
+	opacity: 0.9;
+	max-width: 640px;
+	margin: 0;
+}
+
+/* ---- Pool shape section ----------------------------------- */
+.bk-estimate-pool {
+	background: #fff;
+	padding: 40px 0;
+	border-bottom: 1px solid #e0eaf4;
+}
+
+.bk-estimate-pool__inner {
+	display: flex;
+	gap: 32px;
+	align-items: flex-start;
+}
+
+.bk-estimate-pool__image {
+	flex: 0 0 auto;
+}
+
+.bk-estimate-pool__image img {
+	max-width: 260px;
+	max-height: 180px;
+	border-radius: 6px;
+	border: 1px solid #dce6f0;
+	display: block;
+}
+
+.bk-estimate-pool__specs {
+	flex: 1 1 auto;
+}
+
+/* Specs definition list */
+.bk-estimate-specs {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0;
+	margin-bottom: 16px;
+}
+
+.bk-estimate-specs__row {
+	display: contents;
+}
+
+.bk-estimate-specs dt,
+.bk-estimate-specs dd {
+	padding: 8px 12px;
+	border-bottom: 1px solid #eef3f8;
+	font-size: 0.9rem;
+}
+
+.bk-estimate-specs dt {
+	color: #666;
+	background: #f7fafd;
+}
+
+.bk-estimate-specs dd {
+	font-weight: 600;
+	color: #1a4a6e;
+}
+
+.bk-estimate-pool__description {
+	font-size: 0.9rem;
+	color: #555;
+	line-height: 1.6;
+}
+
+.bk-estimate-pool__description p {
+	margin: 0 0 8px;
+}
+
+/* ---- Quotes section --------------------------------------- */
+.bk-estimate-quotes {
+	padding: 40px 0 56px;
+}
+
+.bk-estimate-quotes__note {
+	font-size: 0.9rem;
+	color: #666;
+	margin-bottom: 24px;
+}
+
+.bk-estimate-cards {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 24px;
+	align-items: start;
+}
+
+/* ---- Agent card ------------------------------------------- */
+.bk-card {
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+	overflow: hidden;
+	border: 1px solid #e0eaf4;
+}
+
+.bk-card__header {
+	background: #f0f5fa;
+	padding: 16px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	border-bottom: 2px solid #cde0f0;
+}
+
+.bk-card__logo {
+	max-width: 70px;
+	max-height: 44px;
+	flex: 0 0 auto;
+	display: block;
+	object-fit: contain;
+}
+
+.bk-card__header-text {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.bk-card__company {
+	font-size: 1rem;
+	font-weight: 700;
+	color: #1a4a6e;
+	margin: 0 0 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.bk-card__contact {
+	font-size: 0.85rem;
+	color: #666;
+	margin: 0;
+}
+
+/* Contact links */
+.bk-card__contact-details {
+	padding: 12px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	border-bottom: 1px solid #eef3f8;
+}
+
+.bk-card__contact-link {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 0.88rem;
+	color: #1a6ea8;
+	text-decoration: none;
+}
+
+.bk-card__contact-link svg {
+	width: 14px;
+	height: 14px;
+	flex: 0 0 auto;
+	color: #1a6ea8;
+}
+
+.bk-card__contact-link:hover {
+	text-decoration: underline;
+}
+
+/* Phone row — tel link + WhatsApp side by side */
+.bk-card__contact-link--phone-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 0.875rem;
+	color: #333;
+}
+
+.bk-card__contact-link--phone-row > a.bk-card__contact-link {
+	flex: 1 1 auto;
+}
+
+.bk-card__wa-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 3px 8px;
+	border-radius: 4px;
+	background: #25d366;
+	color: #fff;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-decoration: none;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+.bk-card__wa-link svg {
+	width: 13px;
+	height: 13px;
+	flex: 0 0 auto;
+	color: #fff;
+}
+
+.bk-card__wa-link:hover {
+	background: #1ebe5d;
+	text-decoration: none;
+}
+
+/* Distance badge */
+.bk-card__distance {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 16px;
+	font-size: 0.85rem;
+	color: #555;
+	background: #f7fafd;
+	border-bottom: 1px solid #eef3f8;
+}
+
+.bk-card__distance svg {
+	width: 14px;
+	height: 14px;
+	color: #1a6ea8;
+	flex: 0 0 auto;
+}
+
+/* Pricing table */
+.bk-card__pricing {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.bk-card__pricing thead tr {
+	background: #1a6ea8;
+	color: #fff;
+}
+
+.bk-card__pricing th {
+	padding: 9px 12px;
+	font-size: 0.82rem;
+	font-weight: 600;
+	text-align: left;
+}
+
+.bk-card__pricing td {
+	padding: 9px 12px;
+	font-size: 0.9rem;
+	border-bottom: 1px solid #eef3f8;
+	color: #444;
+}
+
+.bk-card__pricing tbody tr:nth-child(even) td {
+	background: #f7fafd;
+}
+
+.bk-card__pricing-amount {
+	text-align: right;
+}
+
+.bk-card__included {
+	font-size: 0.8rem;
+	color: #2e8b57;
+	font-weight: 600;
+}
+
+.bk-card__total-row td {
+	background: #1a4a6e !important;
+	color: #fff;
+	font-weight: 700;
+	font-size: 0.95rem;
+	border-bottom: none;
+}
+
+.bk-card__vat-note {
+	font-size: 0.78rem;
+	color: #888;
+	padding: 6px 12px 12px;
+	margin: 0;
+}
+
+/* Collapsible sections */
+.bk-card__collapsible {
+	border-top: 1px solid #e0eaf4;
+}
+
+.bk-card__toggle {
+	width: 100%;
+	background: none;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 16px;
+	font-size: 0.88rem;
+	font-weight: 600;
+	color: #1a4a6e;
+	text-align: left;
+}
+
+.bk-card__toggle:hover {
+	background: #f0f5fa;
+}
+
+.bk-card__toggle-icon {
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: #1a6ea8;
+	flex: 0 0 auto;
+}
+
+.bk-card__collapsible-content {
+	padding: 12px 16px 16px;
+	border-top: 1px solid #eef3f8;
+	background: #fafcff;
+}
+
+.bk-card__collapsible-content[hidden] {
+	display: none;
+}
+
+.bk-card__wysiwyg {
+	font-size: 0.85rem;
+	color: #555;
+	line-height: 1.6;
+}
+
+.bk-card__wysiwyg p {
+	margin: 0 0 8px;
+}
+
+.bk-card__wysiwyg ul,
+.bk-card__wysiwyg ol {
+	padding-left: 20px;
+	margin: 0 0 8px;
+}
+
+/* ---- Footer ----------------------------------------------- */
+.bk-estimate-footer {
+	background: #1a4a6e;
+	color: #a8bfd4;
+	padding: 32px 0;
+}
+
+.bk-estimate-footer__inner {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+	margin-bottom: 16px;
+}
+
+.bk-estimate-footer__logo {
+	max-height: 36px;
+	max-width: 130px;
+	display: block;
+	opacity: 0.85;
+}
+
+.bk-estimate-footer__contact {
+	display: flex;
+	gap: 20px;
+	font-size: 0.9rem;
+}
+
+.bk-estimate-footer__contact a {
+	color: #a8bfd4;
+	text-decoration: none;
+}
+
+.bk-estimate-footer__contact a:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+
+.bk-estimate-footer__disclaimer {
+	font-size: 0.8rem;
+	color: #6a8fb0;
+	margin: 0;
+	line-height: 1.5;
+}
+
+/* ---- Responsive ------------------------------------------- */
+@media (max-width: 900px) {
+	.bk-estimate-cards {
+		grid-template-columns: 1fr;
+		max-width: 480px;
+		margin: 0 auto;
+	}
+}
+
+@media (max-width: 640px) {
+	.bk-estimate-hero__heading {
+		font-size: 1.3rem;
+	}
+
+	.bk-estimate-pool__inner {
+		flex-direction: column;
+	}
+
+	.bk-estimate-pool__image img {
+		max-width: 100%;
+	}
+
+	.bk-estimate-specs {
+		grid-template-columns: 1fr;
+	}
+
+	.bk-estimate-specs__row {
+		display: block;
+	}
+
+	.bk-estimate-specs dt,
+	.bk-estimate-specs dd {
+		display: inline;
+		background: none;
+	}
+
+	.bk-estimate-specs dt::after {
+		content: ': ';
+	}
+
+	.bk-estimate-header__inner {
+		flex-wrap: wrap;
+	}
+
+	.bk-estimate-footer__inner {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.bk-estimate-footer__contact {
+		flex-direction: column;
+		gap: 8px;
+		align-items: center;
+	}
+}
+
+/* ---- Print ------------------------------------------------- */
+@media print {
+	.bk-estimate-header {
+		position: static;
+		background: #1a6ea8 !important;
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+
+	.bk-estimate-hero {
+		background: #1a4a6e !important;
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+
+	.bk-estimate-cards {
+		grid-template-columns: 1fr;
+	}
+
+	.bk-card__collapsible-content {
+		display: block !important;
+	}
+
+	.bk-card__toggle {
+		display: none;
+	}
+
+	.bk-estimate-footer {
+		background: #1a4a6e !important;
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+}

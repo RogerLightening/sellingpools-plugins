@@ -1,0 +1,83 @@
+/**
+ * BK Pools Core — Admin Styles
+ *
+ * Styles for the BK Pools Settings page and shared admin UI components.
+ *
+ * @package BK_Pools_Core
+ * @since   1.0.0
+ */
+
+/* -----------------------------------------------------------------------------
+   Settings page wrapper
+----------------------------------------------------------------------------- */
+
+.bk-pools-settings-wrap {
+	max-width: 900px;
+}
+
+.bk-pools-settings-title {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 24px;
+}
+
+.bk-pools-settings-title .dashicons {
+	font-size: 28px;
+	width: 28px;
+	height: 28px;
+	color: #0073aa;
+}
+
+/* -----------------------------------------------------------------------------
+   Form tables
+----------------------------------------------------------------------------- */
+
+.bk-pools-settings-wrap .form-table th {
+	width: 220px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.bk-pools-settings-wrap .form-table td {
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+
+/* -----------------------------------------------------------------------------
+   Media picker field
+----------------------------------------------------------------------------- */
+
+.bk-media-field {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	align-items: flex-start;
+}
+
+.bk-media-preview img {
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	padding: 4px;
+	background: #fff;
+	max-width: 150px;
+	height: auto;
+}
+
+/* -----------------------------------------------------------------------------
+   Section headings
+----------------------------------------------------------------------------- */
+
+.bk-pools-settings-wrap h2 {
+	border-bottom: 1px solid #dcdcde;
+	padding-bottom: 8px;
+	margin-top: 32px;
+}
+
+/* -----------------------------------------------------------------------------
+   Notices
+----------------------------------------------------------------------------- */
+
+.bk-pools-settings-wrap .notice {
+	margin: 16px 0 0;
+}

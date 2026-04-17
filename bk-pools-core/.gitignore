@@ -1,0 +1,49 @@
+# BK Pools Core — Git Ignore
+# Standard WordPress plugin .gitignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Node (if tooling is added later)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Composer (if added later)
+vendor/
+composer.lock
+
+# Build artefacts
+/dist/
+*.min.css
+*.min.js
+
+# WordPress uploads / generated files
+*.log
+
+# Environment / secrets
+.env
+.env.*
+wp-config.php
+
+# PHPUnit
+.phpunit.result.cache
+/tests/coverage/
+
+# PHPCS cache
+.phpcs-cache
+
+# Temporary files
+*.tmp
+*.bak

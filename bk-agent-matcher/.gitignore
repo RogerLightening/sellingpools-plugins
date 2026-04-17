@@ -1,0 +1,45 @@
+# BK Agent Matcher — Git Ignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Node (if tooling is added later)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Composer (if added later)
+vendor/
+composer.lock
+
+# Build artefacts
+/dist/
+*.min.css
+*.min.js
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+
+# Environment / secrets
+.env
+.env.*
+
+# PHPUnit
+.phpunit.result.cache
+/tests/coverage/
+
+# PHPCS cache
+.phpcs-cache

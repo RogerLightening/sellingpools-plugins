@@ -1,0 +1,12 @@
+# Composer vendor directories (large, not needed in version control)
+bk-estimate-generator/vendor/
+
+# WordPress system files
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE files
+.idea/
+.vscode/
+*.swp

@@ -1,0 +1,88 @@
+/*
+ * BK Estimate PDF Styles
+ *
+ * Reference file — NOT loaded by DomPDF directly.
+ * The actual inline CSS is embedded inside BK_Estimate_PDF::build_pdf_html().
+ * This file exists for developer reference and potential future use with a
+ * PDF renderer that supports external stylesheets.
+ *
+ * @package BK_Estimate_Generator
+ * @since   1.0.0
+ */
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333;
+	line-height: 1.5;
+}
+
+.page {
+	padding: 30px 40px;
+}
+
+.header {
+	border-bottom: 3px solid #1a6ea8;
+	padding-bottom: 16px;
+	margin-bottom: 20px;
+}
+
+.section-heading {
+	background: #1a6ea8;
+	color: #fff;
+	padding: 6px 10px;
+	font-size: 11px;
+	font-weight: bold;
+	margin: 18px 0 8px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 12px;
+}
+
+td, th {
+	padding: 6px 8px;
+}
+
+.pricing-table th {
+	background: #1a6ea8;
+	color: #fff;
+	text-align: left;
+	border: 1px solid #1a6ea8;
+}
+
+.pricing-table td {
+	border: 1px solid #ddd;
+	font-size: 10px;
+}
+
+.pricing-table tr:nth-child(even) td {
+	background: #f7f9fb;
+}
+
+.pricing-table .total-row td {
+	background: #1a4a6e;
+	color: #fff;
+	font-weight: bold;
+	border-color: #1a4a6e;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.footer {
+	border-top: 2px solid #1a6ea8;
+	margin-top: 24px;
+	padding-top: 10px;
+	font-size: 9px;
+	color: #888;
+}

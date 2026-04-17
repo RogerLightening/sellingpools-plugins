@@ -1,0 +1,18 @@
+# Composer
+vendor/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# WordPress
+*.log
+
+# Generated PDFs (runtime — not committed)
+# wp-content/uploads/bk-estimates/ is outside this repo

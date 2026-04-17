@@ -1,0 +1,151 @@
+/**
+ * BK Pools — Suburb Autocomplete Styles
+ *
+ * All classes are scoped under .bk-suburb-autocomplete to avoid conflicts
+ * with BricksBuilder, JetFormBuilder themes, or other plugins.
+ *
+ * @package BK_Agent_Matcher
+ * @since   1.0.0
+ */
+
+/* -----------------------------------------------------------------------------
+   Wrapper — makes the input + dropdown a single positioned unit
+----------------------------------------------------------------------------- */
+
+.bk-suburb-autocomplete {
+	position: relative;
+	display: block;
+	width: 100%;
+}
+
+/* Ensure the search input fills the wrapper */
+.bk-suburb-autocomplete input {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/* -----------------------------------------------------------------------------
+   Dropdown container
+----------------------------------------------------------------------------- */
+
+.bk-suburb-autocomplete__dropdown {
+	position: absolute;
+	top: calc( 100% + 2px );
+	left: 0;
+	right: 0;
+	z-index: 9999;
+	background: #ffffff;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+	box-shadow: 0 4px 16px rgba( 0, 0, 0, 0.12 );
+	max-height: 320px;
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	/* Smooth scroll within dropdown */
+	scroll-behavior: smooth;
+
+	/* Hide scrollbar on Webkit while keeping scroll functionality */
+	scrollbar-width: thin;
+	scrollbar-color: #d1d5db transparent;
+}
+
+.bk-suburb-autocomplete__dropdown::-webkit-scrollbar {
+	width: 4px;
+}
+
+.bk-suburb-autocomplete__dropdown::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.bk-suburb-autocomplete__dropdown::-webkit-scrollbar-thumb {
+	background-color: #d1d5db;
+	border-radius: 4px;
+}
+
+/* -----------------------------------------------------------------------------
+   Result items
+----------------------------------------------------------------------------- */
+
+.bk-suburb-autocomplete__item {
+	padding: 10px 14px;
+	cursor: pointer;
+	font-size: 0.9rem;
+	line-height: 1.4;
+	color: #111827;
+	border-bottom: 1px solid #f3f4f6;
+	transition: background-color 0.1s ease;
+}
+
+.bk-suburb-autocomplete__item:last-child {
+	border-bottom: none;
+}
+
+.bk-suburb-autocomplete__item:hover,
+.bk-suburb-autocomplete__item--active {
+	background-color: #eff6ff;
+	color: #1d4ed8;
+}
+
+/* Highlight matching portion of text */
+.bk-suburb-autocomplete__item strong {
+	font-weight: 700;
+	color: inherit;
+}
+
+/* -----------------------------------------------------------------------------
+   Loading state
+----------------------------------------------------------------------------- */
+
+.bk-suburb-autocomplete__loading {
+	padding: 12px 14px;
+	font-size: 0.875rem;
+	color: #6b7280;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.bk-suburb-autocomplete__loading::before {
+	content: '';
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border: 2px solid #d1d5db;
+	border-top-color: #3b82f6;
+	border-radius: 50%;
+	animation: bk-suburb-spin 0.7s linear infinite;
+	flex-shrink: 0;
+}
+
+@keyframes bk-suburb-spin {
+	to {
+		transform: rotate( 360deg );
+	}
+}
+
+/* -----------------------------------------------------------------------------
+   No results state
+----------------------------------------------------------------------------- */
+
+.bk-suburb-autocomplete__no-results {
+	padding: 12px 14px;
+	font-size: 0.875rem;
+	color: #9ca3af;
+	font-style: italic;
+}
+
+/* -----------------------------------------------------------------------------
+   Responsive — ensure full width on small screens
+----------------------------------------------------------------------------- */
+
+@media ( max-width: 600px ) {
+	.bk-suburb-autocomplete__dropdown {
+		max-height: 240px;
+	}
+
+	.bk-suburb-autocomplete__item {
+		padding: 12px 12px;
+		font-size: 1rem; /* Larger tap target on mobile */
+	}
+}
