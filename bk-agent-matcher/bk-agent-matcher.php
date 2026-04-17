@@ -13,7 +13,7 @@
  * Plugin Name:       SellingPools Agent Matcher
  * Plugin URI:        https://sellingpools.com
  * Description:       Suburb autocomplete and proximity-based agent matching for SellingPools lead generation.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Requires at least: 6.0
  * Requires PHP:      8.0
  * Author:            Lightning Digital
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @var string
  */
-define( 'BK_MATCHER_VERSION', '1.1.0' );
+define( 'BK_MATCHER_VERSION', '1.2.0' );
 
 /**
  * Absolute path to this plugin's directory (with trailing slash).

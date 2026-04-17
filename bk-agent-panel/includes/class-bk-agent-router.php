@@ -236,7 +236,7 @@ class BK_Agent_Router {
 		if ( 'no_capability' === $error ) {
 			echo '<p>' . esc_html__( 'You do not have permission to access the agent panel.', 'bk-agent-panel' ) . '</p>';
 		} elseif ( 'no_profile' === $error ) {
-			echo '<p>' . esc_html__( 'Your agent profile has not been configured yet. Please contact BK Pools to get set up.', 'bk-agent-panel' ) . '</p>';
+			echo '<p>' . esc_html__( 'Your agent profile has not been configured yet. Please contact SellingPools to get set up.', 'bk-agent-panel' ) . '</p>';
 		}
 
 		echo '</div>';

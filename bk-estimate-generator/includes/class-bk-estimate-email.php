@@ -48,12 +48,12 @@ class BK_Estimate_Email {
 		$to      = $customer['email'];
 		$subject = sprintf(
 			/* translators: 1: pool shape name */
-			__( 'Your Pool Estimate — %s | BK Pools', 'bk-estimate-generator' ),
+			__( 'Your Pool Estimate — %s | SellingPools', 'bk-estimate-generator' ),
 			$pool['name']
 		);
 
 		// Build email headers — no need for add_filter/remove_filter dance.
-		$from_name  = $company['name'] ?: 'BK Pools';
+		$from_name  = $company['name'] ?: 'SellingPools';
 		$from_email = $company['email'] ?: get_option( 'admin_email' );
 
 		$headers = array(

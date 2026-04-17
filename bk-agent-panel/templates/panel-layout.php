@@ -43,9 +43,9 @@ $nav_items = array(
 		<div class="bk-panel-header__inner">
 			<div class="bk-panel-header__brand">
 				<?php if ( $bk_logo_url ) : ?>
-					<img src="<?php echo esc_url( $bk_logo_url ); ?>" alt="BK Pools" class="bk-panel-header__logo">
+					<img src="<?php echo esc_url( $bk_logo_url ); ?>" alt="<?php echo esc_attr( BK_Settings::get_setting( 'company_name', 'SellingPools' ) ); ?>" class="bk-panel-header__logo">
 				<?php else : ?>
-					<span class="bk-panel-header__site-name"><?php echo esc_html( BK_Settings::get_setting( 'company_name', 'BK Pools' ) ); ?></span>
+					<span class="bk-panel-header__site-name"><?php echo esc_html( BK_Settings::get_setting( 'company_name', 'SellingPools' ) ); ?></span>
 				<?php endif; ?>
 			</div>
 
@@ -111,8 +111,15 @@ $nav_items = array(
 	<footer class="bk-panel-footer">
 		<p>
 			&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?>
-			<?php echo esc_html( BK_Settings::get_setting( 'company_name', 'BK Pools' ) ); ?>
-			&mdash; <?php esc_html_e( 'Powered by Lightning Digital', 'bk-agent-panel' ); ?>
+			<?php echo esc_html( BK_Settings::get_setting( 'company_name', 'SellingPools' ) ); ?>
+			&mdash;
+			<?php
+			printf(
+				/* translators: %s: SellingPools.com link */
+				esc_html__( 'Developed by: %s', 'bk-agent-panel' ),
+				'<a href="https://sellingpools.com" target="_blank" rel="noopener noreferrer">SellingPools.com</a>'
+			);
+			?>
 		</p>
 	</footer>
 

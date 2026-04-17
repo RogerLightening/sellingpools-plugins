@@ -1,9 +1,9 @@
 {
     "name": "SellingPools Core",
     "slug": "bk-pools-core",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "homepage": "https://sellingpools.com",
-    "download_url": "https://github.com/RogerLightening/sellingpools-plugins/releases/download/v1.1.0/bk-pools-core.zip",
+    "download_url": "https://github.com/RogerLightening/sellingpools-plugins/releases/download/v1.2.0/bk-pools-core.zip",
     "requires": "6.0",
     "tested": "6.7",
     "requires_php": "8.0",

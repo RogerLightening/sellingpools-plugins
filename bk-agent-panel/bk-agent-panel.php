@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SellingPools Agent Panel
  * Description: Frontend dashboard and CRM for SellingPools agents to manage leads, pricing, and profiles.
- * Version:     1.1.0
+ * Version:     1.2.0
  * Author:      Lightning Digital
  * Text Domain: bk-agent-panel
  * Requires PHP: 8.0
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants.
-define( 'BK_PANEL_VERSION',    '1.1.0' );
+define( 'BK_PANEL_VERSION',    '1.2.0' );
 define( 'BK_PANEL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BK_PANEL_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
@@ -69,7 +69,7 @@ function bk_agent_panel_boot(): void {
 			'admin_notices',
 			static function (): void {
 				echo '<div class="notice notice-error"><p>'
-					. esc_html__( 'BK Agent Panel requires the BK Pools Core plugin to be active.', 'bk-agent-panel' )
+					. esc_html__( 'SellingPools Agent Panel requires the SellingPools Core plugin to be active.', 'bk-agent-panel' )
 					. '</p></div>';
 			}
 		);

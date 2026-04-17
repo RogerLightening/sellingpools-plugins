@@ -106,7 +106,7 @@ class BK_Estimate_Page {
 		if ( ! $estimate_post_id ) {
 			self::render_error_page(
 				__( 'Estimate Not Found', 'bk-estimate-generator' ),
-				__( 'Sorry, we could not find an estimate matching this link. Please contact BK Pools for assistance.', 'bk-estimate-generator' )
+				__( 'Sorry, we could not find an estimate matching this link. Please contact SellingPools for assistance.', 'bk-estimate-generator' )
 			);
 			return;
 		}
@@ -117,7 +117,7 @@ class BK_Estimate_Page {
 		if ( ! empty( $expiry ) && strtotime( $expiry ) < current_time( 'timestamp' ) ) {
 			self::render_error_page(
 				__( 'Estimate Expired', 'bk-estimate-generator' ),
-				__( 'This estimate has expired. Please submit a new request or contact BK Pools to request an updated estimate.', 'bk-estimate-generator' )
+				__( 'This estimate has expired. Please submit a new request or contact SellingPools to request an updated estimate.', 'bk-estimate-generator' )
 			);
 			return;
 		}
@@ -134,7 +134,7 @@ class BK_Estimate_Page {
 			) );
 			self::render_error_page(
 				__( 'Estimate Unavailable', 'bk-estimate-generator' ),
-				__( 'Your estimate is temporarily unavailable. Please try again shortly or contact BK Pools.', 'bk-estimate-generator' )
+				__( 'Your estimate is temporarily unavailable. Please try again shortly or contact SellingPools.', 'bk-estimate-generator' )
 			);
 			return;
 		}

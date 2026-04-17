@@ -225,6 +225,15 @@ wp_head();
 			);
 			?>
 		</p>
+		<p class="bk-estimate-footer__credit">
+			<?php
+			printf(
+				/* translators: %s: SellingPools.com link */
+				esc_html__( 'Developed by: %s', 'bk-estimate-generator' ),
+				'<a href="https://sellingpools.com" target="_blank" rel="noopener noreferrer">SellingPools.com</a>'
+			);
+			?>
+		</p>
 	</div>
 </footer>
 

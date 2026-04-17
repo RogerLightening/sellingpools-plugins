@@ -45,7 +45,7 @@ class BK_Settings {
 		'vat_rate'                    => 0.15,
 		'estimate_validity_days'      => 30,
 		'stale_lead_days'             => 7,
-		'company_name'                => 'BK Pools',
+		'company_name'                => 'SellingPools',
 		'company_email'               => '',
 		'company_phone'               => '',
 		'company_logo_id'             => '',
@@ -123,8 +123,8 @@ class BK_Settings {
 	public static function register_menu(): void {
 		// Top-level menu item.
 		add_menu_page(
-			__( 'BK Pools', 'bk-pools-core' ),
-			__( 'BK Pools', 'bk-pools-core' ),
+			__( 'SellingPools', 'bk-pools-core' ),
+			__( 'SellingPools', 'bk-pools-core' ),
 			'manage_options',      // Checked separately; custom cap falls through for managers.
 			'bk-pools',
 			array( static::class, 'render_settings_page' ),
@@ -135,7 +135,7 @@ class BK_Settings {
 		// Settings sub-page (same callback as parent so clicking the top item loads settings).
 		add_submenu_page(
 			'bk-pools',
-			__( 'BK Pools Settings', 'bk-pools-core' ),
+			__( 'SellingPools Settings', 'bk-pools-core' ),
 			__( 'Settings', 'bk-pools-core' ),
 			'manage_options',
 			'bk-pools',
@@ -663,7 +663,7 @@ class BK_Settings {
 			add_settings_error(
 				self::OPTION_KEY,
 				'bk_pools_permission_denied',
-				__( 'You do not have permission to change BK Pools settings.', 'bk-pools-core' ),
+				__( 'You do not have permission to change SellingPools settings.', 'bk-pools-core' ),
 				'error'
 			);
 			return (array) get_option( self::OPTION_KEY, self::$defaults );
@@ -748,7 +748,7 @@ class BK_Settings {
 		<div class="wrap bk-pools-settings-wrap">
 			<h1 class="bk-pools-settings-title">
 				<span class="dashicons dashicons-swimming" aria-hidden="true"></span>
-				<?php esc_html_e( 'BK Pools Settings', 'bk-pools-core' ); ?>
+				<?php esc_html_e( 'SellingPools Settings', 'bk-pools-core' ); ?>
 			</h1>
 
 			<?php settings_errors( self::OPTION_KEY ); ?>
