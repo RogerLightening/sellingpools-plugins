@@ -20,8 +20,8 @@ yarn-error.log
 package-lock.json
 yarn.lock
 
-# Composer (if added later)
-vendor/
+# Composer vendor (exclude, except the bundled PUC library which must be tracked)
+# vendor/     ← intentionally NOT ignored; vendor/puc/ is shipped with the plugin
 composer.lock
 
 # Build artefacts

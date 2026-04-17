@@ -59,6 +59,15 @@ define( 'BK_POOLS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'BK_POOLS_VAT_RATE', 0.15 );
 
 // -------------------------------------------------------------------------
+// Load Plugin Update Checker (bundled in vendor/puc/).
+// This must be loaded early so all plugins can register their checkers.
+// -------------------------------------------------------------------------
+
+if ( file_exists( BK_POOLS_PLUGIN_DIR . 'vendor/puc/load-v5p6.php' ) ) {
+	require_once BK_POOLS_PLUGIN_DIR . 'vendor/puc/load-v5p6.php';
+}
+
+// -------------------------------------------------------------------------
 // Load all class files.
 // -------------------------------------------------------------------------
 
@@ -122,6 +131,17 @@ function bk_pools_init(): void {
 	// Initialise the settings page (registers menus and settings).
 	BK_Settings::init();
 
+	// Register GitHub auth filter so update checks on raw.githubusercontent.com
+	// and release-asset downloads on github.com work with private repositories.
+	bk_pools_register_github_auth();
+
+	// Register this plugin's update checker.
+	bk_pools_register_update_checker(
+		'https://raw.githubusercontent.com/RogerLightening/sellingpools-plugins/main/update-manifests/bk-pools-core.json',
+		__FILE__,
+		'bk-pools-core'
+	);
+
 	/**
 	 * Fires after BK Pools Core has fully loaded.
 	 *
@@ -133,6 +153,76 @@ function bk_pools_init(): void {
 	do_action( 'bk_pools_loaded' );
 }
 add_action( 'plugins_loaded', 'bk_pools_init' );
+
+// -------------------------------------------------------------------------
+// Plugin update helpers (available to all dependent plugins).
+// -------------------------------------------------------------------------
+
+/**
+ * Adds an Authorization header to GitHub requests so update checks and
+ * release-asset downloads work with the private sellingpools-plugins repo.
+ *
+ * Hooked once by bk_pools_init(); dependent plugins do not need to call this.
+ *
+ * @since 1.1.0
+ *
+ * @return void
+ */
+function bk_pools_register_github_auth(): void {
+	$token = BK_Settings::get_setting( 'github_token', '' );
+
+	if ( empty( $token ) ) {
+		return;
+	}
+
+	add_filter(
+		'http_request_args',
+		static function ( array $args, string $url ) use ( $token ): array {
+			// Inject the token for raw content and API/release downloads.
+			if (
+				str_contains( $url, 'raw.githubusercontent.com/RogerLightening' ) ||
+				str_contains( $url, 'api.github.com/repos/RogerLightening' ) ||
+				str_contains( $url, 'github.com/RogerLightening/sellingpools-plugins/releases' )
+			) {
+				if ( ! isset( $args['headers'] ) || ! is_array( $args['headers'] ) ) {
+					$args['headers'] = array();
+				}
+				$args['headers']['Authorization'] = 'token ' . $token;
+			}
+			return $args;
+		},
+		10,
+		2
+	);
+}
+
+/**
+ * Registers a Plugin Update Checker instance for a given plugin.
+ *
+ * Uses PUC's JSON-file update source. The JSON file is hosted in the
+ * sellingpools-plugins GitHub repository under update-manifests/.
+ *
+ * Called by bk-pools-core for itself, and by each dependent plugin's boot
+ * function after confirming bk-pools-core is active (which ensures PUC is loaded).
+ *
+ * @since 1.1.0
+ *
+ * @param string $metadata_url Absolute URL to the plugin's update-manifest JSON file.
+ * @param string $plugin_file  Absolute path to the plugin's main PHP file (__FILE__).
+ * @param string $slug         Plugin folder/slug (e.g. 'bk-agent-panel').
+ * @return void
+ */
+function bk_pools_register_update_checker( string $metadata_url, string $plugin_file, string $slug ): void {
+	if ( ! class_exists( 'YahnisElsts\PluginUpdateChecker\v5p6\PucFactory' ) ) {
+		return;
+	}
+
+	YahnisElsts\PluginUpdateChecker\v5p6\PucFactory::buildUpdateChecker(
+		$metadata_url,
+		$plugin_file,
+		$slug
+	);
+}
 
 // -------------------------------------------------------------------------
 // Enqueue admin assets.

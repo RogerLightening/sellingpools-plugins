@@ -1,6 +1,9 @@
 # Composer vendor directories (large, not needed in version control)
 bk-estimate-generator/vendor/
 
+# Build artefacts
+.build-tmp/
+
 # WordPress system files
 .DS_Store
 Thumbs.db

@@ -89,4 +89,11 @@ function bk_agent_panel_boot(): void {
 	new BK_Agent_Auth();
 	new BK_Agent_CRM();
 	new BK_Agent_Router();
+
+	// Register update checker (PUC is loaded by bk-pools-core).
+	bk_pools_register_update_checker(
+		'https://raw.githubusercontent.com/RogerLightening/sellingpools-plugins/main/update-manifests/bk-agent-panel.json',
+		__FILE__,
+		'bk-agent-panel'
+	);
 }

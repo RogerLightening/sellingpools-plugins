@@ -81,6 +81,13 @@ function bk_estimate_generator_boot(): void {
 	// Initialise.
 	new BK_Estimate_Page();
 	new BK_Estimate_Generator();
+
+	// Register update checker (PUC is loaded by bk-pools-core).
+	bk_pools_register_update_checker(
+		'https://raw.githubusercontent.com/RogerLightening/sellingpools-plugins/main/update-manifests/bk-estimate-generator.json',
+		__FILE__,
+		'bk-estimate-generator'
+	);
 }
 
 /**

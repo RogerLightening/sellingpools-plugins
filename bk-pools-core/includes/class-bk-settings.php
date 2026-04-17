@@ -58,6 +58,8 @@ class BK_Settings {
 		'feature_star_ratings'        => 1,
 		'feature_leaderboard'         => 1,
 		'feature_rewards'             => 0,
+		// Plugin updates via GitHub.
+		'github_token'                => '',
 	);
 
 	// -------------------------------------------------------------------------
@@ -314,6 +316,26 @@ class BK_Settings {
 			)
 		);
 
+		// -- Section: Plugin Updates ------------------------------------------
+		add_settings_section(
+			'bk_pools_section_updates',
+			__( 'Plugin Updates', 'bk-pools-core' ),
+			array( static::class, 'render_updates_intro' ),
+			'bk-pools-settings'
+		);
+
+		add_settings_field(
+			'github_token',
+			__( 'GitHub Access Token', 'bk-pools-core' ),
+			array( static::class, 'field_password' ),
+			'bk-pools-settings',
+			'bk_pools_section_updates',
+			array(
+				'key'         => 'github_token',
+				'description' => __( 'Personal access token (classic) with repo scope. Required for WordPress to check for and download plugin updates from the private GitHub repository.', 'bk-pools-core' ),
+			)
+		);
+
 		// -- Section: Agent Rewards --------------------------------------------
 		add_settings_section(
 			'bk_pools_section_rewards',
@@ -492,6 +514,39 @@ class BK_Settings {
 	}
 
 	/**
+	 * Renders the introductory text for the Plugin Updates section.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @return void
+	 */
+	public static function render_updates_intro(): void {
+		echo '<p class="description">';
+		esc_html_e( 'Configure the GitHub token so WordPress can check for plugin updates from the private sellingpools-plugins repository.', 'bk-pools-core' );
+		echo '</p>';
+	}
+
+	/**
+	 * Renders a password input field (value is masked in the browser).
+	 *
+	 * @since 1.1.0
+	 *
+	 * @param array<string, mixed> $args Field arguments.
+	 * @return void
+	 */
+	public static function field_password( array $args ): void {
+		$key   = $args['key'];
+		$value = self::get_setting( $key, '' );
+		printf(
+			'<input type="password" id="%1$s" name="%2$s[%1$s]" value="%3$s" class="regular-text" autocomplete="new-password" />',
+			esc_attr( $key ),
+			esc_attr( self::OPTION_KEY ),
+			esc_attr( $value )
+		);
+		self::render_description( $args );
+	}
+
+	/**
 	 * Renders the introductory text for the Feature Toggles section and enqueues
 	 * the inline JS that shows/hides the reward fields based on the toggle state.
 	 *
@@ -652,6 +707,11 @@ class BK_Settings {
 		// Phone — strip non-numeric except leading +.
 		$sanitised['company_phone'] = isset( $input['company_phone'] )
 			? BK_Helpers::sanitise_phone( $input['company_phone'] )
+			: '';
+
+		// GitHub token — store as-is (sanitize_text_field strips non-printable chars).
+		$sanitised['github_token'] = isset( $input['github_token'] )
+			? sanitize_text_field( $input['github_token'] )
 			: '';
 
 		// Feature toggles — checkboxes are absent from $_POST when unchecked.

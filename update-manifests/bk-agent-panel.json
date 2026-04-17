@@ -1,0 +1,15 @@
+{
+    "name": "SellingPools Agent Panel",
+    "slug": "bk-agent-panel",
+    "version": "1.1.0",
+    "homepage": "https://sellingpools.com",
+    "download_url": "https://github.com/RogerLightening/sellingpools-plugins/releases/download/v1.1.0/bk-agent-panel.zip",
+    "requires": "6.0",
+    "tested": "6.7",
+    "requires_php": "8.0",
+    "sections": {
+        "description": "Frontend dashboard and CRM for SellingPools agents to manage leads, pricing, and profiles."
+    },
+    "author": "<a href='https://lightningdigital.co.za'>Lightning Digital</a>",
+    "last_updated": "2026-04-17 00:00:00"
+}

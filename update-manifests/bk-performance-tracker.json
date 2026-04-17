@@ -1,0 +1,15 @@
+{
+    "name": "SellingPools Performance Tracker",
+    "slug": "bk-performance-tracker",
+    "version": "1.1.0",
+    "homepage": "https://sellingpools.com",
+    "download_url": "https://github.com/RogerLightening/sellingpools-plugins/releases/download/v1.1.0/bk-performance-tracker.zip",
+    "requires": "6.0",
+    "tested": "6.7",
+    "requires_php": "8.0",
+    "sections": {
+        "description": "Admin performance dashboard, feature toggles, and automated tasks for SellingPools."
+    },
+    "author": "<a href='https://lightningdigital.co.za'>Lightning Digital</a>",
+    "last_updated": "2026-04-17 00:00:00"
+}

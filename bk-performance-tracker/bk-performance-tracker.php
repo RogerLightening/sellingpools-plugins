@@ -129,6 +129,13 @@ function bk_tracker_load(): void {
 	// bk_pools_loaded fires at plugins_loaded priority 10 — it has already
 	// fired by the time we reach priority 20, so call init directly.
 	bk_tracker_init();
+
+	// Register update checker (PUC is loaded by bk-pools-core).
+	bk_pools_register_update_checker(
+		'https://raw.githubusercontent.com/RogerLightening/sellingpools-plugins/main/update-manifests/bk-performance-tracker.json',
+		__FILE__,
+		'bk-performance-tracker'
+	);
 }
 add_action( 'plugins_loaded', 'bk_tracker_load', 20 );
 

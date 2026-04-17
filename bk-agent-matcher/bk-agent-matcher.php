@@ -93,6 +93,13 @@ function bk_matcher_init(): void {
 	// JFB's own Redirect To Page action now handles the post-submission redirect,
 	// using the estimate_token written by the hidden form field so the URL is
 	// available to JFB before the after-send hook fires.
+
+	// Register update checker (PUC is loaded by bk-pools-core).
+	bk_pools_register_update_checker(
+		'https://raw.githubusercontent.com/RogerLightening/sellingpools-plugins/main/update-manifests/bk-agent-matcher.json',
+		__FILE__,
+		'bk-agent-matcher'
+	);
 }
 
 /**
