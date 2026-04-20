@@ -1,9 +1,9 @@
 {
     "name": "SellingPools Agent Matcher",
     "slug": "bk-agent-matcher",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "homepage": "https://sellingpools.com",
-    "download_url": "https://github.com/RogerLightening/sellingpools-plugins/releases/download/v1.2.1/bk-agent-matcher.zip",
+    "download_url": "https://github.com/RogerLightening/sellingpools-plugins/releases/download/v1.2.2/bk-agent-matcher.zip",
     "requires": "6.0",
     "tested": "6.7",
     "requires_php": "8.0",
@@ -11,5 +11,5 @@
         "description": "Suburb autocomplete and proximity-based agent matching for SellingPools lead generation."
     },
     "author": "<a href='https://lightningdigital.co.za'>Lightning Digital</a>",
-    "last_updated": "2026-04-20 14:30:55"
+    "last_updated": "2026-04-20 15:27:30"
 }
