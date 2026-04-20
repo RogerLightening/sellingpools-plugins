@@ -220,40 +220,15 @@ class BK_Agent_Router {
 			)
 		);
 
-		// On the profile section, also enqueue the suburb autocomplete from bk-agent-matcher.
-		if ( 'profile' === $section ) {
-			$matcher_dir = WP_PLUGIN_DIR . '/bk-agent-matcher/';
-			$matcher_url = WP_PLUGIN_URL . '/bk-agent-matcher/';
-
-			if ( file_exists( $matcher_dir . 'assets/css/suburb-autocomplete.css' ) ) {
-				wp_enqueue_style(
-					'bk-suburb-autocomplete',
-					$matcher_url . 'assets/css/suburb-autocomplete.css',
-					array(),
-					BK_PANEL_VERSION
-				);
-			}
-
-			if ( file_exists( $matcher_dir . 'assets/js/suburb-autocomplete.js' ) ) {
-				wp_enqueue_script(
-					'bk-suburb-autocomplete',
-					$matcher_url . 'assets/js/suburb-autocomplete.js',
-					array(),
-					BK_PANEL_VERSION,
-					true
-				);
-
-				wp_localize_script(
-					'bk-suburb-autocomplete',
-					'bk_suburb_params',
-					array(
-						'ajax_url'  => admin_url( 'admin-ajax.php' ),
-						'nonce'     => wp_create_nonce( 'bk_suburb_search' ),
-						'min_chars' => 2,
-					)
-				);
-			}
-		}
+		// Suburb autocomplete — bk-agent-matcher's BK_Suburb_Lookup already hooks
+		// into wp_enqueue_scripts globally and enqueues the same 'bk-suburb-autocomplete'
+		// style/script with the correct URLs and nonce. panel-standalone.php calls
+		// wp_head() which fires wp_enqueue_scripts, so those assets load on the
+		// profile page automatically. Registering a duplicate handle here from
+		// template_redirect (which runs earlier) would "win" because WP's enqueue
+		// API refuses to overwrite an already-registered src — which is how the
+		// old code caused the profile autocomplete to silently miss the matcher's
+		// canonical URL + nonce pair.
 	}
 
 	/**

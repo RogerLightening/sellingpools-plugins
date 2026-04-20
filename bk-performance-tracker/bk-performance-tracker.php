@@ -13,7 +13,7 @@
  * Plugin Name:       SellingPools Performance Tracker
  * Plugin URI:        https://sellingpools.com
  * Description:       Admin performance dashboard, feature toggles, and automated tasks for SellingPools.
- * Version:           1.2.2
+ * Version:           1.2.3
  * Requires at least: 6.0
  * Requires PHP:      8.0
  * Author:            Lightning Digital
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @var string
  */
-define( 'BK_TRACKER_VERSION', '1.2.2' );
+define( 'BK_TRACKER_VERSION', '1.2.3' );
 
 /**
  * Absolute path to the plugin directory (with trailing slash).

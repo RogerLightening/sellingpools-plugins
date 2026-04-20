@@ -481,10 +481,19 @@ class BK_Agent_CRM {
 		if ( isset( $_POST['suburb_id'] ) ) {
 			$suburb_id = (int) $_POST['suburb_id'];
 			update_post_meta( $agent_post_id, 'suburb_id', $suburb_id );
+			error_log( 'BK save profile: suburb_id=' . $suburb_id . ' for agent_post_id=' . $agent_post_id );
 
 			if ( $suburb_id ) {
 				$this->update_agent_coordinates( $agent_post_id, $suburb_id );
+			} else {
+				// User cleared the suburb field — drop the stale coordinates so
+				// distance calculations don't use the previous suburb's lat/lng.
+				delete_post_meta( $agent_post_id, 'physical_address_lat' );
+				delete_post_meta( $agent_post_id, 'physical_address_lng' );
+				error_log( 'BK save profile: cleared physical_address_lat/lng' );
 			}
+		} else {
+			error_log( 'BK save profile: suburb_id not in POST — autocomplete hidden input may be missing or disabled' );
 		}
 
 		wp_send_json_success( array( 'message' => __( 'Profile saved successfully.', 'bk-agent-panel' ) ) );
@@ -667,10 +676,12 @@ class BK_Agent_CRM {
 		);
 
 		if ( ! $suburb ) {
+			error_log( 'BK save profile: suburb_id ' . $suburb_id . ' not found in ' . $suburbs_table );
 			return;
 		}
 
 		update_post_meta( $agent_post_id, 'physical_address_lat', (float) $suburb->latitude );
 		update_post_meta( $agent_post_id, 'physical_address_lng', (float) $suburb->longitude );
+		error_log( 'BK save profile: updated lat=' . $suburb->latitude . ' lng=' . $suburb->longitude . ' from suburb_id=' . $suburb_id );
 	}
 }
