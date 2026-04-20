@@ -1,9 +1,9 @@
 {
     "name": "SellingPools Estimate Generator",
     "slug": "bk-estimate-generator",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "homepage": "https://sellingpools.com",
-    "download_url": "https://github.com/RogerLightening/sellingpools-plugins/releases/download/v1.2.2/bk-estimate-generator.zip",
+    "download_url": "https://github.com/RogerLightening/sellingpools-plugins/releases/download/v1.2.3/bk-estimate-generator.zip",
     "requires": "6.0",
     "tested": "6.7",
     "requires_php": "8.0",
@@ -11,5 +11,5 @@
         "description": "HTML and PDF estimate generation with email delivery for SellingPools."
     },
     "author": "<a href='https://lightningdigital.co.za'>Lightning Digital</a>",
-    "last_updated": "2026-04-20 15:27:30"
+    "last_updated": "2026-04-20 15:42:08"
 }
