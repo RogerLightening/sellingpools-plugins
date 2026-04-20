@@ -2,7 +2,13 @@
 /**
  * Agent panel login form.
  *
- * Shown when an unauthenticated user visits the panel page.
+ * Shown when an unauthenticated user visits the panel page. The POST is
+ * handled in BK_Agent_Router::maybe_handle_login() before any output, so
+ * wp_signon() can still set cookies and redirect.
+ *
+ * Variables expected from caller scope:
+ *
+ * @var string $login_error Error message from wp_signon(), or empty string.
  *
  * @package BK_Agent_Panel
  * @since   1.0.0
@@ -16,28 +22,7 @@ $bk_logo_id  = (int) BK_Settings::get_setting( 'company_logo_id', 0 );
 $bk_logo_url = $bk_logo_id ? wp_get_attachment_url( $bk_logo_id ) : '';
 $company     = BK_Settings::get_setting( 'company_name', 'BK Pools' );
 $panel_url   = BK_Agent_Auth::get_panel_url();
-
-// Handle login form submission (for non-JS fallback).
-$login_error = '';
-
-if ( isset( $_POST['bk_login_submit'] ) ) {
-	check_admin_referer( 'bk_agent_login' );
-
-	$credentials = array(
-		'user_login'    => sanitize_user( wp_unslash( $_POST['log'] ?? '' ) ),
-		'user_password' => wp_unslash( $_POST['pwd'] ?? '' ),
-		'remember'      => ! empty( $_POST['rememberme'] ),
-	);
-
-	$user = wp_signon( $credentials, is_ssl() );
-
-	if ( is_wp_error( $user ) ) {
-		$login_error = $user->get_error_message();
-	} else {
-		wp_safe_redirect( $panel_url );
-		exit;
-	}
-}
+$login_error = $login_error ?? '';
 ?>
 <div class="bk-agent-panel bk-panel-login">
 	<div class="bk-login-card">

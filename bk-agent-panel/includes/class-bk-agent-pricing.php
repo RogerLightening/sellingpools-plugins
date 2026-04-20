@@ -52,6 +52,11 @@ class BK_Agent_Pricing {
 					psm.shape_name,
 					psm.shape_code,
 					psm.shell_price,
+					psm.shape_image,
+					psm.dimensions_length,
+					psm.dimensions_width,
+					psm.dimensions_depth_shallow,
+					psm.dimensions_depth_deep,
 					ap.id             AS pricing_id,
 					ap.installed_price_excl,
 					ap.installed_price_incl,
@@ -79,7 +84,9 @@ class BK_Agent_Pricing {
 		$result = array();
 
 		foreach ( $rows as $row ) {
-			$has_pricing = null !== $row['pricing_id'];
+			$has_pricing     = null !== $row['pricing_id'];
+			$shape_image_id  = (int) $row['shape_image'];
+			$shape_image_url = $shape_image_id ? (string) wp_get_attachment_url( $shape_image_id ) : '';
 
 			$result[] = array(
 				'pricing_id'           => $has_pricing ? (int) $row['pricing_id'] : null,
@@ -87,6 +94,12 @@ class BK_Agent_Pricing {
 				'shape_name'           => (string) $row['shape_name'],
 				'shape_code'           => (string) $row['shape_code'],
 				'shell_price_excl'     => (float) $row['shell_price'],
+				'shape_image_id'       => $shape_image_id,
+				'shape_image_url'      => $shape_image_url,
+				'dimensions_length'    => (float) $row['dimensions_length'],
+				'dimensions_width'     => (float) $row['dimensions_width'],
+				'depth_shallow'        => (float) $row['dimensions_depth_shallow'],
+				'depth_deep'           => (float) $row['dimensions_depth_deep'],
 				'installed_price_excl' => $has_pricing ? (float) $row['installed_price_excl'] : 0.0,
 				'installed_price_incl' => $has_pricing ? (float) $row['installed_price_incl'] : 0.0,
 				'is_available'         => $has_pricing ? (bool) $row['is_available'] : true,

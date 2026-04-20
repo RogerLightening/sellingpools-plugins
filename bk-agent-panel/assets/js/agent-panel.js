@@ -565,4 +565,49 @@
 		}, 300 );
 	} );
 
+	// -------------------------------------------------------
+	// Shape image modal (pricing section)
+	// -------------------------------------------------------
+
+	document.addEventListener( 'DOMContentLoaded', function () {
+		var modal = document.querySelector( '[data-bk-modal]' );
+		if ( ! modal ) { return; }
+
+		var modalImage = modal.querySelector( '[data-bk-modal-image]' );
+		var modalTitle = modal.querySelector( '.bk-modal__title' );
+
+		function openModal( url, title ) {
+			modalImage.src = url;
+			modalImage.alt = title || '';
+			if ( modalTitle ) { modalTitle.textContent = title || ''; }
+			modal.hidden = false;
+			document.body.classList.add( 'bk-modal-open' );
+		}
+
+		function closeModal() {
+			modal.hidden = true;
+			modalImage.src = '';
+			document.body.classList.remove( 'bk-modal-open' );
+		}
+
+		document.addEventListener( 'click', function ( e ) {
+			var trigger = e.target.closest( '[data-bk-shape-image]' );
+			if ( trigger ) {
+				e.preventDefault();
+				openModal( trigger.dataset.imageUrl, trigger.dataset.imageTitle );
+				return;
+			}
+			if ( e.target.closest( '[data-bk-modal-close]' ) ) {
+				e.preventDefault();
+				closeModal();
+			}
+		} );
+
+		document.addEventListener( 'keydown', function ( e ) {
+			if ( e.key === 'Escape' && ! modal.hidden ) {
+				closeModal();
+			}
+		} );
+	} );
+
 }() );

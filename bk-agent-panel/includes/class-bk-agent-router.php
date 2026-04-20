@@ -66,6 +66,12 @@ class BK_Agent_Router {
 			return;
 		}
 
+		// Handle the login form POST before any output, so wp_signon()'s
+		// setcookie() and the wp_login-hooked redirect can fire while headers
+		// are still modifiable. On success, BK_Agent_Auth::redirect_after_login()
+		// exits before we reach the include below.
+		$login_error = $this->maybe_handle_login();
+
 		$access        = BK_Agent_Auth::check_access();
 		$section       = $this->get_section();
 		$panel_url     = BK_Agent_Auth::get_panel_url();
@@ -76,6 +82,39 @@ class BK_Agent_Router {
 
 		// Output the full standalone page and bail before the theme renders.
 		include BK_PANEL_PLUGIN_DIR . 'templates/panel-standalone.php';
+		exit;
+	}
+
+	/**
+	 * Processes the login form POST, if present.
+	 *
+	 * Must be called before any output so wp_signon() can set auth cookies
+	 * and the wp_login action can redirect.
+	 *
+	 * @since 1.2.1
+	 * @return string Error message on failure, empty string otherwise.
+	 */
+	private function maybe_handle_login(): string {
+		if ( ! isset( $_POST['bk_login_submit'] ) ) {
+			return '';
+		}
+
+		check_admin_referer( 'bk_agent_login' );
+
+		$credentials = array(
+			'user_login'    => sanitize_user( wp_unslash( $_POST['log'] ?? '' ) ),
+			'user_password' => wp_unslash( $_POST['pwd'] ?? '' ),
+			'remember'      => ! empty( $_POST['rememberme'] ),
+		);
+
+		$user = wp_signon( $credentials, is_ssl() );
+
+		if ( is_wp_error( $user ) ) {
+			return $user->get_error_message();
+		}
+
+		// Safety net — in normal flow redirect_after_login has already exited.
+		wp_safe_redirect( BK_Agent_Auth::get_panel_url() );
 		exit;
 	}
 

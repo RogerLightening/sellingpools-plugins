@@ -132,6 +132,7 @@ class BK_Agent_Auth {
 	 */
 	public static function check_access(): array {
 		if ( ! is_user_logged_in() ) {
+			error_log( 'BK Panel auth: not logged in' );
 			return array(
 				'ok'            => false,
 				'error'         => 'not_logged_in',
@@ -139,7 +140,17 @@ class BK_Agent_Auth {
 			);
 		}
 
-		if ( ! current_user_can( 'bk_view_leads' ) ) {
+		$user_id  = get_current_user_id();
+		$is_agent = current_user_can( 'bk_view_leads' );
+		$is_admin = current_user_can( 'manage_options' );
+
+		error_log( 'BK Panel auth: user_id=' . $user_id . ' bk_view_leads=' . ( $is_agent ? '1' : '0' ) . ' manage_options=' . ( $is_admin ? '1' : '0' ) );
+
+		// Admins get full access so they can preview / support the panel,
+		// even if they don't have the bk_view_leads capability or a linked
+		// agent profile.
+		if ( ! $is_agent && ! $is_admin ) {
+			error_log( 'BK Panel auth: denied — no capability' );
 			return array(
 				'ok'            => false,
 				'error'         => 'no_capability',
@@ -148,8 +159,18 @@ class BK_Agent_Auth {
 		}
 
 		$agent_post_id = self::get_agent_post_id();
+		error_log( 'BK Panel auth: agent_post_id=' . (int) $agent_post_id );
 
 		if ( ! $agent_post_id ) {
+			if ( $is_admin ) {
+				error_log( 'BK Panel auth: admin without agent profile — allowed through' );
+				return array(
+					'ok'            => true,
+					'error'         => '',
+					'agent_post_id' => 0,
+				);
+			}
+			error_log( 'BK Panel auth: denied — no agent profile' );
 			return array(
 				'ok'            => false,
 				'error'         => 'no_profile',
@@ -157,6 +178,7 @@ class BK_Agent_Auth {
 			);
 		}
 
+		error_log( 'BK Panel auth: access granted' );
 		return array(
 			'ok'            => true,
 			'error'         => '',

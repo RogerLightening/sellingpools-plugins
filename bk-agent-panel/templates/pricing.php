@@ -14,6 +14,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $pricing_rows = BK_Agent_Pricing::get_pricing( $agent_post_id );
+
+/**
+ * Formats pool dimensions as "L × W m" with an optional depth hint.
+ *
+ * @param array $row Pricing row with dimension keys.
+ * @return string Formatted dimensions string, or em-dash if length/width are both 0.
+ */
+$format_dimensions = static function ( array $row ): string {
+	$length = (float) ( $row['dimensions_length'] ?? 0 );
+	$width  = (float) ( $row['dimensions_width'] ?? 0 );
+
+	if ( $length <= 0 && $width <= 0 ) {
+		return '<span class="bk-text-muted">—</span>';
+	}
+
+	$dims    = sprintf( '%s &times; %s m', rtrim( rtrim( number_format( $length, 2, '.', '' ), '0' ), '.' ), rtrim( rtrim( number_format( $width, 2, '.', '' ), '0' ), '.' ) );
+	$shallow = (float) ( $row['depth_shallow'] ?? 0 );
+	$deep    = (float) ( $row['depth_deep'] ?? 0 );
+
+	if ( $shallow > 0 && $deep > 0 ) {
+		$depth = $shallow === $deep
+			? sprintf( '%s m deep', rtrim( rtrim( number_format( $shallow, 2, '.', '' ), '0' ), '.' ) )
+			: sprintf( '%s&ndash;%s m deep', rtrim( rtrim( number_format( $shallow, 2, '.', '' ), '0' ), '.' ), rtrim( rtrim( number_format( $deep, 2, '.', '' ), '0' ), '.' ) );
+		$dims .= '<br><span class="bk-dimensions-depth">' . $depth . '</span>';
+	}
+
+	return $dims;
+};
 ?>
 
 <div class="bk-section-header">
@@ -39,6 +67,7 @@ $pricing_rows = BK_Agent_Pricing::get_pricing( $agent_post_id );
 					<tr>
 						<th><?php esc_html_e( 'Shape', 'bk-agent-panel' ); ?></th>
 						<th><?php esc_html_e( 'Code', 'bk-agent-panel' ); ?></th>
+						<th><?php esc_html_e( 'Dimensions', 'bk-agent-panel' ); ?></th>
 						<th class="bk-text-right"><?php esc_html_e( 'All-Inclusive Price (incl. VAT)', 'bk-agent-panel' ); ?></th>
 						<th class="bk-text-center"><?php esc_html_e( 'Available', 'bk-agent-panel' ); ?></th>
 					</tr>
@@ -55,8 +84,25 @@ $pricing_rows = BK_Agent_Pricing::get_pricing( $agent_post_id );
 								<?php if ( ! $row['has_pricing'] ) : ?>
 									<span class="bk-badge bk-badge--warning"><?php esc_html_e( 'Set price', 'bk-agent-panel' ); ?></span>
 								<?php endif; ?>
+								<?php if ( $row['shape_image_url'] ) : ?>
+									<br>
+									<a
+										href="#"
+										class="bk-shape-image-link"
+										data-bk-shape-image
+										data-image-url="<?php echo esc_url( $row['shape_image_url'] ); ?>"
+										data-image-title="<?php echo esc_attr( $row['shape_name'] ); ?>"
+									><?php esc_html_e( 'View image', 'bk-agent-panel' ); ?></a>
+								<?php endif; ?>
 							</td>
 							<td><code><?php echo esc_html( $row['shape_code'] ); ?></code></td>
+							<td class="bk-dimensions-cell">
+								<?php
+								// $format_dimensions returns already-escaped HTML; the numeric bits pass
+								// through number_format and the static string is under our control.
+								echo $format_dimensions( $row ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								?>
+							</td>
 							<td class="bk-text-right">
 								<input
 									type="number"
@@ -92,4 +138,18 @@ $pricing_rows = BK_Agent_Pricing::get_pricing( $agent_post_id );
 			</table>
 		</div>
 	<?php endif; ?>
+</div>
+
+<!-- Shape image modal -->
+<div class="bk-modal" id="bk-shape-image-modal" data-bk-modal hidden>
+	<div class="bk-modal__backdrop" data-bk-modal-close></div>
+	<div class="bk-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="bk-shape-image-title">
+		<div class="bk-modal__header">
+			<h3 class="bk-modal__title" id="bk-shape-image-title"></h3>
+			<button type="button" class="bk-modal__close" data-bk-modal-close aria-label="<?php esc_attr_e( 'Close', 'bk-agent-panel' ); ?>">&times;</button>
+		</div>
+		<div class="bk-modal__body">
+			<img src="" alt="" class="bk-modal__image" data-bk-modal-image>
+		</div>
+	</div>
 </div>
