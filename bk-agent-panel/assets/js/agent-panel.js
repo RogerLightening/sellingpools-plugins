@@ -301,6 +301,23 @@
 
 	var priceDebounce = {};
 
+	/**
+	 * Parses a price input value — strips spaces used as thousand separators
+	 * before parseFloat so "25 000" → 25000.
+	 */
+	function parsePriceValue( str ) {
+		return parseFloat( String( str ).replace( /\s/g, '' ) );
+	}
+
+	/**
+	 * Formats a number for display in the price input: no decimals, space
+	 * as thousand separator (e.g. 25000 → "25 000").
+	 */
+	function formatPriceDisplay( n ) {
+		if ( isNaN( n ) || n === null ) { return ''; }
+		return String( Math.round( n ) ).replace( /\B(?=(\d{3})+(?!\d))/g, ' ' );
+	}
+
 	document.addEventListener( 'change', function ( e ) {
 		var input = e.target.closest( '[data-bk-price-input]' );
 		if ( input ) { savePriceInput( input ); }
@@ -314,10 +331,21 @@
 		input.blur();
 	} );
 
+	// Re-format the price input on blur so typed values pick up the space
+	// separator without interrupting the user while they're editing.
+	document.addEventListener( 'blur', function ( e ) {
+		var input = e.target.closest( '[data-bk-price-input]' );
+		if ( ! input ) { return; }
+		var n = parsePriceValue( input.value );
+		if ( ! isNaN( n ) && n >= 0 ) {
+			input.value = formatPriceDisplay( n );
+		}
+	}, true );
+
 	function savePriceInput( input ) {
 		var shapeId   = input.getAttribute( 'data-shape-id' );
 		var pricingId = input.getAttribute( 'data-pricing-id' ) || '0';
-		var price     = parseFloat( input.value );
+		var price     = parsePriceValue( input.value );
 
 		if ( isNaN( price ) || price < 0 ) { return; }
 

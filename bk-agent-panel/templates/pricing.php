@@ -105,12 +105,11 @@ $format_dimensions = static function ( array $row ): string {
 							</td>
 							<td class="bk-text-right">
 								<input
-									type="number"
+									type="text"
+									inputmode="numeric"
 									class="bk-price-input"
-									value="<?php echo esc_attr( $row['has_pricing'] ? number_format( $row['installed_price_incl'], 2, '.', '' ) : '' ); ?>"
+									value="<?php echo esc_attr( $row['has_pricing'] ? number_format( $row['installed_price_incl'], 0, '.', ' ' ) : '' ); ?>"
 									placeholder="<?php esc_attr_e( 'Enter all-in price', 'bk-agent-panel' ); ?>"
-									min="0"
-									step="0.01"
 									data-pricing-id="<?php echo esc_attr( $row['pricing_id'] ?? '' ); ?>"
 									data-shape-id="<?php echo esc_attr( $row['pool_shape_id'] ); ?>"
 									data-bk-price-input
