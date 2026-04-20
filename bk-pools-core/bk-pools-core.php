@@ -14,7 +14,7 @@
  * Plugin Name:       SellingPools Core
  * Plugin URI:        https://sellingpools.com
  * Description:       Foundation plugin for the SellingPools lead generation platform. Provides database tables, custom roles, settings, and shared utilities.
- * Version:           1.2.0
+ * Version:           1.2.2
  * Requires at least: 6.0
  * Requires PHP:      8.0
  * Author:            Lightning Digital
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @var string
  */
-define( 'BK_POOLS_VERSION', '1.2.0' );
+define( 'BK_POOLS_VERSION', '1.2.2' );
 
 /**
  * Absolute path to the plugin directory (with trailing slash).

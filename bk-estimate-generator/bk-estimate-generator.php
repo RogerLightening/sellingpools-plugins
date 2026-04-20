@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SellingPools Estimate Generator
  * Description: HTML and PDF estimate generation with email delivery for SellingPools.
- * Version:     1.2.0
+ * Version:     1.2.2
  * Author:      Lightning Digital
  * Text Domain: bk-estimate-generator
  * Requires PHP: 8.0
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants.
-define( 'BK_ESTIMATOR_VERSION',    '1.2.0' );
+define( 'BK_ESTIMATOR_VERSION',    '1.2.2' );
 define( 'BK_ESTIMATOR_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BK_ESTIMATOR_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
